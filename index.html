@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <title>Amazonas</title>
+</head>
+<body>
+    <main>
+        <section>
+            <section class="board"></section>
+        </section>
+        <aside>
+            <section id="instructions">
+                <h1>Amazonas</h1>
+                <p>
+                    Implemented by <a href="https://github.com/downloadablefox">DownloadableFox</a>
+                    <br/><br/>
+
+                    <strong>Objective:</strong>
+                    The goal is to isolate your opponent's Amazons (queens) so they cannot move, 
+                    while ensuring your Amazons remain mobile.
+                </p>
+            </section>
+            <hr/>
+            <section id="controls">
+                <h2>Game Controls</h2>
+                <a id="start-game" class="button">Reset Game</a>
+            </section>
+            <hr/>
+            <section id="moves">
+                <h2>Moves</h2>
+                <table id="moves-table">
+                    <thead>
+                        <tr>
+                            <th>Color</th>
+                            <th>From</th>
+                            <th>Position</th>
+                            <th>Arrow</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="center"><div class="icon-white"></div></td>
+                            <td>A2</td>
+                            <td>H2</td>
+                            <td>C3</td>
+                        </tr>
+                        <tr>
+                            <td class="center"><div class="icon-black"></div></td>
+                            <td>A2</td>
+                            <td>D2</td>
+                            <td>G3</td>
+                        </tr>
+                        <tr>
+                            <td class="center"><div class="icon-white"></div></td>
+                            <td>A2</td>
+                            <td>H2</td>
+                            <td>C3</td>
+                        </tr>
+                        <tr>
+                            <td class="center"><div class="icon-black"></div></td>
+                            <td>A2</td>
+                            <td>D2</td>
+                            <td>G3</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </aside>
+    </main>
+    <script type="module" src="game.js"></script>
+</body>
+</html>
