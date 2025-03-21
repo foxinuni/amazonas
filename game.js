@@ -8,7 +8,11 @@ const boardSize = 10;
 const pieces = {
     a: [[0, 6], [3, 9], [6, 9], [9, 6]],
     b: [[0, 3], [3, 0], [6, 0], [9, 3]]
-}
+};
+
+const arrows = [
+    [0, 0]
+];
 
 const board = Array(boardSize).fill().map(() => Array(boardSize).fill(0));
 
@@ -59,10 +63,26 @@ function drawPieces() {
     }
 }
 
+function drawArrows() {
+    const arrow = document.createElement('div');
+    arrow.classList.add('arrow');
+
+    arrows.forEach(position => {
+        const [x, y] = position;
+        const index = y * boardSize + x;
+        const cell = boardElement.children[index];
+        const newArrow = arrow.cloneNode();
+
+        cell.appendChild(newArrow);
+    });
+}
+
+
 function update() {
     clearBoard();   
     drawBoard();
     drawPieces();
+    drawArrows();
 }
 
 /* Game logic */

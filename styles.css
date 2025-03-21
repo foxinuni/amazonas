@@ -179,3 +179,26 @@ table td.center {
 .player-b:hover {
     background-color: #333333;
 }
+
+.arrow {
+    width: 25%;
+    height: 25%;
+    position: relative;
+}
+
+.arrow::after {
+    content: '+';
+    color: #404040;
+    font-size: 4em;
+    font-weight: bold;
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.arrow:hover::after {
+    color: #454545;
+}
