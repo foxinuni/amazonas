@@ -119,3 +119,29 @@ function calculateMoves(piece) {
 update();
 
 calculateMoves(pieces.a[0]);
+
+document.getElementById("start-game").addEventListener("click", () => {
+    alert("check console");
+    
+    Module.ccall(
+      "myFunction", // name of C function
+      null, // return type
+      null, // argument types
+      null, // arguments
+    );
+
+    /*
+   
+    // value_container_t* generate_container()
+    const generate_container = Module.cwrap('generate_container', 'number', []);
+    
+    // void free_container(value_container_t* container)
+    const free_container = Module.cwrap('free_container', null, ['number']);
+
+    const container = generate_container();
+    console.log("Container: ", container);
+
+    free_container(container);
+    */
+
+  });
