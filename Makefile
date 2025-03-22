@@ -18,7 +18,7 @@ setup:
 	$(EMSDK_ENV)
 
 build: $(SOURCES)
-	@emcc -O3 $(SOURCES) -o $(PUBLIC_DIR)/amazons.js -s NO_EXIT_RUNTIME=1 -s "EXPORTED_RUNTIME_METHODS=['ccall','cwrap']"
+	@emcc -DDEBUG -O3 $(SOURCES) -o $(PUBLIC_DIR)/amazons.js -s NO_EXIT_RUNTIME=1 -s "EXPORTED_RUNTIME_METHODS=['ccall','cwrap']"
 
 start:
 	@python -m http.server --directory $(PUBLIC_DIR) 8080

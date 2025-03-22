@@ -7,7 +7,20 @@
     <title>Amazonas</title>
 </head>
 <body>
-    <main>
+    <section id="loading-page" class="loading-page">
+        <section class="loading">
+            <h1>Game of the Amazons</h1>
+            <p>
+                This game relies on WebAssembly and Javascript to work!
+                <br/>
+                Please be patient while we download the required dependencies...
+            </p>
+    
+            <div class="loading-spinner"></div>
+        </section>
+    </section>
+
+    <main id="game-page" style="display: none">
         <section>
             <section class="board"></section>
         </section>
@@ -26,6 +39,11 @@
             <hr/>
             <section id="controls">
                 <h2>Game Controls</h2>
+                <p>
+                    <strong>Game State:</strong> <span id="game-state">unknown</span>
+                    <br/>
+                    <strong>Current Player:</strong> <span id="current-player">unknown</span>
+                </p>
                 <a id="start-game" class="button">Reset Game</a>
             </section>
             <hr/>
@@ -70,7 +88,6 @@
             </section>
         </aside>
     </main>
-    <script src="game.js"></script>
-    <script src="amazons.js" async></script>
+    <script src="interface.js"></script>
 </body>
 </html>
