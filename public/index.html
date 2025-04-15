@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
     <title>Amazonas</title>
 </head>
 <body>
@@ -22,7 +22,14 @@
 
     <main id="game-page" style="display: none">
         <section>
-            <section class="board"></section>
+            <div id="game-overlay" class="game-overlay" style="display: none;">
+                <div class="overlay-content">
+                    <h1 id="overlay-title">Game Over</h1>
+                    <p id="overlay-message">Player <span id="winner-player">unknown</span> wins!</p>
+                    <button id="overlay-button" class="button">Start New Game</button>
+                </div>
+            </div>
+            <section id="board" class="board"></section>
         </section>
         <aside>
             <section id="instructions">
@@ -88,6 +95,8 @@
             </section>
         </aside>
     </main>
-    <script src="interface.js"></script>
+    <script src="scripts/board.js"></script>
+    <script src="scripts/game.js"></script>
+    <script src="scripts/init.js"></script>
 </body>
 </html>

@@ -2,7 +2,7 @@ EMSDK_DIR = emsdk
 SOURCE_DIR = src
 PUBLIC_DIR = public
 
-SOURCES = $(wildcard $(SOURCE_DIR)/*.c)
+SOURCES = $(wildcard $(SOURCE_DIR)/*.cpp)
 
 ifeq ($(OS),Windows_NT)
 	EMSDK_SH := $(EMSDK_DIR)\emsdk.bat
@@ -18,7 +18,7 @@ setup:
 	$(EMSDK_ENV)
 
 build: $(SOURCES)
-	@emcc -DDEBUG -O3 $(SOURCES) -o $(PUBLIC_DIR)/amazons.js -s NO_EXIT_RUNTIME=1 -s "EXPORTED_RUNTIME_METHODS=['ccall','cwrap']"
+	@em++ -DDEBUG -O3 $(SOURCES) -o $(PUBLIC_DIR)/amazons.js -s NO_EXIT_RUNTIME=1 -s "EXPORTED_RUNTIME_METHODS=['ccall','cwrap']"
 
 start:
 	@python -m http.server --directory $(PUBLIC_DIR) 8080

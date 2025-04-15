@@ -178,6 +178,7 @@ table td.center {
     background: #151515;
 }
 
+
 .board {
     display: grid;
     grid-template-columns: repeat(10, 1fr);
@@ -200,17 +201,6 @@ table td.center {
     background-color: #f0b775;
 }
 
-.white.possible-move {
-    background-color: #9fcfff;
-    cursor: pointer;
-    box-shadow: 0 0 5px rgba(135, 206, 235, 0.4);
-}
-
-.white.possible-move:hover {
-    background-color: #75aef0;
-    box-shadow: 0 0 8px rgba(135, 206, 235, 0.5);
-}
-
 .black {
     background-color: #d28c45;
 }
@@ -219,80 +209,50 @@ table td.center {
     background-color: #b86b1f;
 }
 
-.black.possible-move {
-    background-color: #458bd2;
-    cursor: pointer;
-    box-shadow: 0 0 10px rgba(70, 130, 180, 0.6);
+.white.marked {
+    background-color: #ff4646;
 }
 
-.black.possible-move:hover {
-    background-color: #1f6cb8;
-    box-shadow: 0 0 15px rgba(70, 130, 180, 0.8);
+.black.marked {
+    background-color: #ff3232;
 }
 
 .piece {
-    border-radius: 50%;
-    width: 80%;
-    height: 80%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    width: 95%;
+    height: 95%;
+}
+
+.piece.selectable:hover {
+    transform: scale(1.1);
+    transition: transform 0.1s ease-in-out;
+    cursor: pointer;
 }
 
 .player-white {
-    background-color: #f0f0f0;
-}
-
-.player-white.enabled:hover {
-    background-color: #d9d9d9;
-    cursor: pointer;
-}
-
-.player-white.selected {
-    animation: glow-white 1s ease-in-out infinite alternate;
-}
-
-@keyframes glow-white {
-    from {
-        box-shadow: 0 0 10px #f0f0f0;
-    }
-    to {
-        box-shadow: 0 0 20px #f0f0f0;
-    }
+    background-image: url('/svg/white_queen.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .player-black {
-    background-color: #202020;
-}
-
-.player-black.enabled:hover {
-    background-color: #333333;
-    cursor: pointer;
-}
-
-.player-black.selected {
-    animation: glow-black 1s ease-in-out infinite alternate;
-}
-
-@keyframes glow-black {
-    from {
-        box-shadow: 0 0 10px #202020;
-    }
-    to {
-        box-shadow: 0 0 20px #202020;
-    }
+    background-image: url('/svg/black_queen.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .arrow {
-    width: 25%;
-    height: 25%;
+    width: 45%;
+    height: 45%;
     position: relative;
 }
 
 .arrow::after {
-    content: '+';
-    color: #404040;
-    font-size: 4em;
+    content: '•';
+    color: #101010;
+    font-size: 6em;
     font-weight: bold;
-    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 
     position: absolute;
     top: 50%;
@@ -302,4 +262,42 @@ table td.center {
 
 .arrow:hover::after {
     color: #454545;
+}
+
+.possible-move {
+    width: 45%;
+    height: 45%;
+    position: relative;
+    cursor: pointer;
+}
+
+.possible-move::after {
+    content: '•';
+    color: #8bc34ad0;
+    font-size: 3.5em;
+    font-weight: bold;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.possible-target {
+    width: 45%;
+    height: 45%;
+    position: relative;
+    cursor: pointer;
+}
+
+.possible-target::after {
+    content: '•';
+    color: #ff000080;
+    font-size: 3.5em;
+    font-weight: bold;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
