@@ -1,6 +1,9 @@
 const loading_element = document.querySelector('#loading-page');
 const main_element = document.querySelector('#game-page');
 const board_element = document.querySelector('#board');
+const overlay_element = document.querySelector('#game-overlay');
+const start_button = document.querySelector('#overlay-local-start');
+const start_bot_button = document.querySelector('#overlay-bot-start');
 
 function show_game() {
     loading_element.style.display = 'none';
@@ -25,7 +28,16 @@ function load_game() {
 
     const board = new Board(board_element, 10);
     const game = new Game(board, api);
-    game.setup(); // Set up the game
+    game.setup();
+
+    start_button.addEventListener('click', () => {
+        game.setup();
+        overlay_element.style.display = 'none';
+    });
+
+    start_bot_button.addEventListener('click', () => {
+        alert('This feature is not implemented yet!');
+    });
 
     show_game();
 }

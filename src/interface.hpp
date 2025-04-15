@@ -4,7 +4,6 @@
 #include <emscripten/emscripten.h>
 #include "game.hpp"
 
-
 #ifdef __cplusplus
 #define EXTERN extern "C"
 #else

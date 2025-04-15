@@ -144,20 +144,25 @@ std::vector<Position> Game::calculate_moves(int x, int y) const {
 
 Winner Game::check_winner() const {
     int trapped_counter = 0;
+    int white_counter = 0;
+    int black_counter = 0;
 
     for (int x = 0; x < BOARD_SIZE; ++x) {
         for (int y = 0; y < BOARD_SIZE; ++y) {
             size_t index = translate_position(x, y);
+            int area = 0;
 
-            if (board[index] == PieceType::WHITE && trapped_area(x, y).size() > 0) {
+            if (board[index] == PieceType::WHITE && (area = trapped_area(x, y).size()) > 0) {
                 ++trapped_counter;
+                white_counter += area;
+            } else if (board[index] == PieceType::BLACK && (area = trapped_area(x, y).size()) > 0) {
+                black_counter += area;
             }
         }
     }
 
     if (trapped_counter == 4) {
-        // TO-DO: Calculate areas of the trapped pieces
-        return Winner::WINNER_WHITE; // All white pieces are trapped
+        return (white_counter > black_counter) ? Winner::WINNER_WHITE : Winner::WINNER_BLACK;
     } else {
         return Winner::WINNER_NONE; // No winner yet
     }
