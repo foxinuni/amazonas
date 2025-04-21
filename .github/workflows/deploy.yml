@@ -12,10 +12,16 @@ jobs:
       # Step 1: Check out your repo
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          submodules: true # Important for emsdk
 
       # Step 2: Build your project
       - name: Build
-        run: make build
+        run: |
+          ./emsdk/emsdk install latest  # Install the latest Emscripten SDK
+          ./emsdk/emsdk activate latest  # Activate the latest Emscripten SDK
+          source ./emsdk/emsdk_env.sh  # Set up the environment variables
+          make build # Build your project using Makefile or any other build system
 
       # Step 3: Deploy to GitHub Pages
       - name: Deploy
