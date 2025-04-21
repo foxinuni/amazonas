@@ -3,7 +3,7 @@
 ### Compiling
 1. Clone the repository and change into the directory
 ```sh
-git clone https://github.com/foxinuni/amazonas`
+git clone https://github.com/foxinuni/amazonas
 cd amazonas
 ```
 
