@@ -283,14 +283,14 @@ table td.center {
 }
 
 .player-white {
-    background-image: url('/svg/white_queen.svg');
+    background-image: url('../svg/white_queen.svg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
 }
 
 .player-black {
-    background-image: url('/svg/black_queen.svg');
+    background-image: url('../svg/black_queen.svg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
