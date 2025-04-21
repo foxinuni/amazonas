@@ -1,0 +1,27 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]  # Trigger on pushes to 'main' branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest  # Use a fresh Linux VM
+
+    steps:
+      # Step 1: Check out your repo
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2: Build your project
+      - name: Build
+        run: make build
+
+      # Step 3: Deploy to GitHub Pages
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}  # GitHub's auto-generated token
+          publish_dir: ./public  # Folder containing built files (e.g., HTML, WASM, JS)
+          branch: gh-pages
+          # Optional: Use `branch: gh-pages` if deploying to a different branch
