@@ -1,0 +1,357 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #202020;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+main {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+main > section {
+    flex: 3;
+    position: relative
+}
+
+aside {
+    flex: 1;
+    padding: 25px;
+    background-color: rgb(56, 56, 56);
+    color: #f0f0f0;
+}
+
+aside h1 {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+aside h2 {
+    margin: 5px 0;
+    font-size: 1.2em;
+}
+
+aside p {
+    margin: 0;
+    font-size: 0.8em;
+    text-align: justify;
+}
+
+aside a {
+    color: #dadada;
+    font-style: italic;
+}
+
+aside hr {
+    margin: 25px 0;
+}
+
+aside .button {
+    display: inline-block;
+    margin: 10px 5px;
+    padding: 6px 10px;
+    
+    font-size: 0.8em;
+    font-style: normal;
+    
+    color: #f0f0f0;
+    background-color: #202020;
+    border-radius: 2px;
+}
+
+aside .button:hover {
+    cursor: pointer;
+    background-color: #101010;
+}
+
+table {
+    width: 100%;
+    margin: 25px 0;
+
+    border-collapse: collapse;
+
+    
+    color: #f0f0f0;
+    background-color: #101010;
+    border-radius: 2px;
+    font-size: 0.8em;
+}
+
+thead {
+    background-color: #303030;
+}
+
+table th {
+    padding: 5px 10px;
+    font-weight: bold;
+    color: #f0f0f0;
+    border-bottom: 1px solid #202020;
+}
+
+table tr:nth-child(even) {
+    background-color: #202020;
+}
+
+table td {
+    padding: 5px 10px;
+}
+
+table td.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loading-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    height: 100vh;
+}
+
+.loading {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    padding: 25px 40px;
+
+    color: #f0f0f0;
+    background-color: rgb(56, 56, 56);
+}
+
+.loading-spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+
+    animation: rotate 2s linear infinite;
+}
+
+.loading > h1 {
+    margin: 5px;
+    font-size: 1.5em;
+}
+
+.loading > p {
+    margin: 20px;
+    font-size: 0.8em;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.icon-white {
+    width: 1em;
+    height: 1em;
+
+    border-radius: 50%;
+    background-color: #f0f0f0;
+}
+
+.icon-black {
+    width: 1em;
+    height: 1em;
+
+    border-radius: 50%;
+    background: #151515;
+}
+
+.game-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    color: #f0f0f0;
+    background-color: rgba(30, 30, 30, 0.8);
+    z-index: 1000;
+ 
+    margin: 50px auto;
+    width: calc(100vh - 100px);
+    height: calc(100vh - 100px);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-overlay h1 {
+    margin: 0;
+    font-size: 3.5em;
+    font-family: 'Playfair Display', serif, cursive;
+    font-weight: bold;
+}
+
+.game-overlay h2 {
+    margin: 5px 0;
+    font-size: 1em;
+}
+
+.game-overlay a {
+    color: #dadada;
+    font-style: italic;
+    text-decoration: none;
+}
+
+.game-overlay button {
+    margin: 10px 5px;
+    padding: 6px 10px;
+    
+    font-size: 1em;
+    font-style: normal;
+    
+    color: #f0f0f0;
+    background-color: #202020;
+    border-radius: 2px;
+
+    border: 0;
+}
+
+.game-overlay button:hover {
+    cursor: pointer;
+    background-color: #101010;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    margin: 50px auto;
+    width: calc(100vh - 100px);
+    height: calc(100vh - 100px);
+}
+
+.cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.white {
+    background-color: #ffcf9f;
+}
+
+.white:hover {
+    background-color: #f0b775;
+}
+
+.black {
+    background-color: #d28c45;
+}
+
+.black:hover {
+    background-color: #b86b1f;
+}
+
+.white.marked {
+    background-color: #ff4646;
+}
+
+.black.marked {
+    background-color: #ff3232;
+}
+
+.piece {
+    width: 95%;
+    height: 95%;
+}
+
+.piece.selectable:hover {
+    transform: scale(1.1);
+    transition: transform 0.1s ease-in-out;
+    cursor: pointer;
+}
+
+.player-white {
+    background-image: url('/svg/white_queen.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.player-black {
+    background-image: url('/svg/black_queen.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.arrow {
+    width: 45%;
+    height: 45%;
+    position: relative;
+}
+
+.arrow::after {
+    content: '•';
+    color: #101010;
+    font-size: 6em;
+    font-weight: bold;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.arrow:hover::after {
+    color: #454545;
+}
+
+.possible-move {
+    width: 45%;
+    height: 45%;
+    position: relative;
+    cursor: pointer;
+}
+
+.possible-move::after {
+    content: '•';
+    color: #8bc34ad0;
+    font-size: 3.5em;
+    font-weight: bold;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.possible-target {
+    width: 45%;
+    height: 45%;
+    position: relative;
+    cursor: pointer;
+}
+
+.possible-target::after {
+    content: '•';
+    color: #ff000080;
+    font-size: 3.5em;
+    font-weight: bold;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

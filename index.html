@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <title>Amazonas</title>
+</head>
+<body>
+    <section id="loading-page" class="loading-page">
+        <section class="loading">
+            <h1>Game of the Amazons</h1>
+            <p>
+                This game relies on WebAssembly and Javascript to work!
+                <br/>
+                Please be patient while we download the required dependencies...
+            </p>
+    
+            <div class="loading-spinner"></div>
+        </section>
+    </section>
+
+    <main id="game-page" style="display: none">
+        <section>
+            <div id="game-overlay" class="game-overlay">
+                <h1 id="overlay-title">Amazonas</h1>
+                <h2 id="overlay-subtitle">Implemented by <a href="https://github.com/downloadablefox">DownloadableFox</a></h2>
+
+                <span>
+                    <button id="overlay-local-start" class="button">Local Match</button>
+                    <button id="overlay-bot-start" class="button">Bot Match</button>
+                </span>
+            </div>
+            <section id="board" class="board"></section>
+        </section>
+        <aside>
+            <section id="instructions">
+                <h1>Amazonas</h1>
+                <p>
+                    Implemented by <a href="https://github.com/downloadablefox">DownloadableFox</a>
+                    <br/><br/>
+
+                    <strong>Objective:</strong>
+                    The goal is to isolate your opponent's Amazons (queens) so they cannot move, 
+                    while ensuring your Amazons remain mobile.
+                </p>
+            </section>
+            <hr/>
+            <section id="controls">
+                <h2>Game Controls</h2>
+                <p>
+                    <strong>Game State:</strong> <span id="game-state">unknown</span>
+                    <br/>
+                    <strong>Current Player:</strong> <span id="current-player">unknown</span>
+                </p>
+                <a id="start-game" class="button">Reset Game</a>
+            </section>
+            <hr/>
+            <section id="moves">
+                <h2>Moves</h2>
+                <table id="moves-table">
+                    <thead>
+                        <tr>
+                            <th>Color</th>
+                            <th>From</th>
+                            <th>Position</th>
+                            <th>Arrow</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="center"><div class="icon-white"></div></td>
+                            <td>A2</td>
+                            <td>H2</td>
+                            <td>C3</td>
+                        </tr>
+                        <tr>
+                            <td class="center"><div class="icon-black"></div></td>
+                            <td>A2</td>
+                            <td>D2</td>
+                            <td>G3</td>
+                        </tr>
+                        <tr>
+                            <td class="center"><div class="icon-white"></div></td>
+                            <td>A2</td>
+                            <td>H2</td>
+                            <td>C3</td>
+                        </tr>
+                        <tr>
+                            <td class="center"><div class="icon-black"></div></td>
+                            <td>A2</td>
+                            <td>D2</td>
+                            <td>G3</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </aside>
+    </main>
+    <script src="scripts/board.js"></script>
+    <script src="scripts/game.js"></script>
+    <script src="scripts/init.js"></script>
+</body>
+</html>
