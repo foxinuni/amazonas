@@ -11,6 +11,8 @@ html, body {
 
 main {
     display: flex;
+    width: 100vw;
+    height: 100vh;
     flex-direction: row;
     justify-content: center;
 }
@@ -25,6 +27,7 @@ aside {
     padding: 25px;
     background-color: rgb(56, 56, 56);
     color: #f0f0f0;
+    height: 100%;
 }
 
 aside h1 {
@@ -62,6 +65,7 @@ aside .button {
     
     color: #f0f0f0;
     background-color: #202020;
+    text-decoration: none;
     border-radius: 2px;
 }
 
@@ -74,8 +78,10 @@ table {
     width: 100%;
     margin: 25px 0;
 
-    border-collapse: collapse;
+    height: max-content;
+    overflow-y: scroll;
 
+    border-collapse: collapse;
     
     color: #f0f0f0;
     background-color: #101010;

@@ -4,10 +4,14 @@ const Piece = Object.freeze({ EMPTY: 'EMPTY', ARROW: 'ARROW', BLACK: 'BLACK', WH
 const Winner = Object.freeze({ NONE: 'NONE', WHITE: 'WHITE', BLACK: 'BLACK' });
 
 class Game {
-    constructor(board, api) {
+    constructor(board, bot, api) {
         this.board = board;
+        this.bot = bot;
         this.api = api;
+        this.moves = [];
+        this.use_bot = false;
         this.selected_piece = null;
+        this.cached_move = { from: [0, 0], move: [0, 0], arrow: [0, 0] };
     }
 
     reset_game() {
@@ -150,10 +154,16 @@ class Game {
         });
         
         this.board.draw_board();
+        this.board.display_moves_table(this.moves);
+        this.board.display_game_state(
+            this.get_game_state() == GameState.RUNNING ? CurrentState.RUNNING : CurrentState.GAME_OVER,
+            this.get_current_player() === PlayerType.WHITE ? CurrentPlayer.WHITE : CurrentPlayer.BLACK
+        );
     }
 
     select_piece(x, y, color) {
         console.log("Selecting piece at (" + x + ", " + y + ") with color " + color);
+        this.cached_move.from = [x, y];
 
         const current_player = this.get_current_player();
         const is_player = 
@@ -172,6 +182,8 @@ class Game {
     select_move(x, y) {
         // move the piece to the selected position
         console.log("Moving piece from (" + this.selected_piece[0] + ", " + this.selected_piece[1] + ") to (" + x + ", " + y + ")");
+        this.cached_move.to = [x, y];
+
         this.move_piece(this.selected_piece[0], this.selected_piece[1], x, y);
         this.refresh_board(false);
 
@@ -182,16 +194,28 @@ class Game {
     }
 
     select_arrow(x, y) {
+        console.log("Throwing arrow to (" + x + ", " + y + ")");
+        this.cached_move.arrow = [x, y];
+
         this.throw_arrow(x, y);
         this.refresh_board(false);
 
         // show possible moves for the next player
+        this.moves.push({
+            from: this.cached_move.from,
+            to: this.cached_move.to,
+            arrow: this.cached_move.arrow
+        });
+
         this.next_player();
         this.next_turn();
     }
 
-    setup() {
-        console.log('Setting up the game...');
+    setup(use_bot = false) {
+        this.use_bot = use_bot;
+        this.moves = [];
+
+        console.log('Setting up the game... with bot:', use_bot);
 
         // Set up the board with the initial state
         this.board.setup_callbacks(
@@ -210,9 +234,37 @@ class Game {
         this.board.possible_targets = [];
         this.selected_piece = null;
 
-        if (this.check_winner() !== Winner.NONE) {
-            alert('Game Over!');
+        if (this.use_bot && this.get_current_player() === PlayerType.BLACK) {
+            console.log('Bot is making a decision...');
             this.refresh_board(false);
+
+            const decesion = this.bot.make_decision();
+            this.move_piece(
+                decesion.from[0], 
+                decesion.from[1], 
+                decesion.move[0], 
+                decesion.move[1]
+            );
+            
+            this.throw_arrow(decesion.arrow[0], decesion.arrow[1]);
+            
+            this.moves.push({
+                from: decesion.from,
+                to: decesion.move,
+                arrow: decesion.arrow
+            });
+
+            this.next_player();
+            this.next_turn();
+            return;
+        }
+
+        if (this.check_winner() !== Winner.NONE) {
+            this.refresh_board(false);
+
+            const winner = this.check_winner();
+            this.board.display_winner(winner === Winner.WHITE ? CurrentPlayer.WHITE : CurrentPlayer.BLACK)
+
             return;
         }
 
@@ -222,10 +274,12 @@ class Game {
             ? CellState.PLAYER_WHITE 
             : CellState.PLAYER_BLACK;
 
+
         this.refresh_board();
     }
 
     debug_print_board(board = this.get_board()) {
+        /*
         // Print the board as a 10x10 table
         for (let i = 0; i < 10; i++) {
             const row = board.slice(i * 10, (i + 1) * 10).map(piece => {
@@ -243,6 +297,33 @@ class Game {
                 }
             }).join(' ');
             console.log(row);
-        }        
+        }
+        */
+    }
+}
+
+class Bot {
+    constructor(api) {
+        this.api = api;
+    }
+
+    make_decision() {
+        const decision_ptr = this.api.make_decision();
+
+        const decision = new Uint32Array(Module.HEAPU8.buffer, decision_ptr, 6);
+        const from_x = decision[0];
+        const from_y = decision[1];
+
+        const move_x = decision[2];
+        const move_y = decision[3];
+
+        const arrow_x = decision[4];
+        const arrow_y = decision[5];
+
+        return {
+            from: [from_x, from_y],
+            move: [move_x, move_y],
+            arrow: [arrow_x, arrow_y]
+        };
     }
 }
