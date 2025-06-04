@@ -55,6 +55,7 @@ public:
 
     void reset_game();
     void next_player();
+
     GameState get_game_state() const;
     Player get_current_player() const;
 
@@ -62,10 +63,13 @@ public:
 
     void move_piece(int from_x, int from_y, int to_x, int to_y);
     void throw_arrow(int x, int y);
+    void set_piece(int x, int y, PieceType piece);
+
     bool inside_board(int x, int y) const;
 
-    std::vector<Position> calculate_moves(int x, int y) const;
     Winner check_winner() const;
+
+    std::vector<Position> calculate_moves(int x, int y) const;
     std::vector<Position> trapped_area(int x, int y) const;
     std::array<bool, BOARD_SIZE * BOARD_SIZE> get_areas() const;
 

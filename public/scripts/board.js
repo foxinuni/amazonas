@@ -5,9 +5,25 @@ const CellState = Object.freeze({
     ARROW: 'OBSTACLE',
 });
 
+const CurrentPlayer = Object.freeze({
+    WHITE: 'white',
+    BLACK: 'black',
+});
+
+const CurrentState = Object.freeze({
+    RUNNING: 'running',
+    GAME_OVER: 'game over',
+});
+
 class Board {
-    constructor(element, board_size) {
-        this.element = element;
+    constructor(element_set, board_size) {
+        this.element = element_set.board;
+        this.moves_table_element = element_set.moves_table;
+        this.winner_overlay_element = element_set.winner_overlay;
+        this.winner_text_element = element_set.winner_text;
+        this.game_state_element = element_set.game_state;
+        this.current_player_element = element_set.current_player;
+
         this.board_size = board_size;
 
         // Initialize the board with empty cells
@@ -112,6 +128,64 @@ class Board {
                 }
             }
         }
+    }
+
+    display_moves_table(moves) {
+        if (moves.length === 0) {
+            this.moves_table_element.innerHTML = '<tr id="no-moves-message"><td colspan="4" style="text-align:center;">No move has been made.</td></tr>';
+            return;
+        }
+
+        const white_icon = document.createElement('div');
+        white_icon.classList.add('icon-white');
+
+        const black_icon = document.createElement('div');
+        black_icon.classList.add('icon-black');
+
+        function position_to_code(x, y) {
+            return `${String.fromCharCode(65 + x)}${y + 1}`;
+        }
+
+        // color, from, to, arrow
+        this.moves_table_element.innerHTML = '';
+
+        for (let i = 0; i < moves.length; i++) {
+            const move = moves[i];
+            const row = document.createElement('tr');
+
+            const color_cell = document.createElement('td');
+            color_cell.classList.add('center');
+            if (i % 2 === 0) {
+                color_cell.appendChild(white_icon.cloneNode());
+            } else {
+                color_cell.appendChild(black_icon.cloneNode());
+            }
+            row.appendChild(color_cell);
+
+            const from_cell = document.createElement('td');
+            from_cell.textContent = position_to_code(move.from[0], move.from[1]);
+            row.appendChild(from_cell);
+
+            const to_cell = document.createElement('td');
+            to_cell.textContent = position_to_code(move.to[0], move.to[1]);
+            row.appendChild(to_cell);
+
+            const arrow_cell = document.createElement('td');
+            arrow_cell.textContent = position_to_code(move.arrow[0], move.arrow[1]);
+            row.appendChild(arrow_cell);
+
+            this.moves_table_element.appendChild(row);
+        }
+    }
+
+    display_game_state(state, current_player) {
+        this.game_state_element.textContent = state;
+        this.current_player_element.textContent = current_player;
+    }
+
+    display_winner(winner) {
+        this.winner_overlay_element.style.display = 'flex';
+        this.winner_text_element.textContent = winner;
     }
 
     setup_callbacks(select_piece_callback, select_move_callback, select_arrow_callback) {

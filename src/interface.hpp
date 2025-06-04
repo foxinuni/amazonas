@@ -3,6 +3,7 @@
 
 #include <emscripten/emscripten.h>
 #include "game.hpp"
+#include "bot.hpp"
 
 #ifdef __cplusplus
 #define EXTERN extern "C"
@@ -31,5 +32,8 @@ WASM_EXPORT void wasm_throw_arrow(int x, int y);
 /* Logic */
 WASM_EXPORT Winner wasm_check_winner();
 WASM_EXPORT bool* wasm_get_areas();
+
+/* Bot */
+WASM_EXPORT BotDecision* wasm_make_decision();
 
 #endif // AMAZONS_INTERFACE_H

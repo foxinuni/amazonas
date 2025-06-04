@@ -34,6 +34,16 @@
                     <button id="overlay-bot-start" class="button">Bot Match</button>
                 </span>
             </div>
+
+            <div id="winner-overlay" class="game-overlay" style="display: none;">
+                <h1 id="winner-title">Game Over</h1>
+                <h2 id="winner-subtitle">Congratulations! Player <em id="winner-text">white</em> has won the game.</h2>
+
+                <span>
+                    <button id="overlay-restart" class="button" onclick="window.location.reload();">Play Again</button>
+                </span>
+            </div>
+            
             <section id="board" class="board"></section>
         </section>
         <aside>
@@ -56,12 +66,12 @@
                     <br/>
                     <strong>Current Player:</strong> <span id="current-player">unknown</span>
                 </p>
-                <a id="start-game" class="button">Reset Game</a>
+                <a id="start-game" class="button" href="#" onclick="location.reload(); return false;">Reset Game</a>
             </section>
             <hr/>
             <section id="moves">
                 <h2>Moves</h2>
-                <table id="moves-table">
+                <table>
                     <thead>
                         <tr>
                             <th>Color</th>
@@ -70,7 +80,10 @@
                             <th>Arrow</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="moves-table">
+                        <tr id="no-moves-message">
+                            <td colspan="4" style="text-align:center;">No moves</td>
+                        </tr>
                         <tr>
                             <td class="center"><div class="icon-white"></div></td>
                             <td>A2</td>

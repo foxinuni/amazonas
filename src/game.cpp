@@ -1,6 +1,5 @@
 #include "game.hpp"
 
-#include <iostream>
 #include <queue>
 #include <set>
 #include <algorithm>
@@ -115,6 +114,15 @@ void Game::throw_arrow(int x, int y) {
     board[index] = PieceType::ARROW;
 }
 
+void Game::set_piece(int x, int y, PieceType piece) {
+    if (!inside_board(x, y)) {
+        throw std::out_of_range("Position is out of board bounds");
+    }
+
+    size_t index = translate_position(x, y);
+    board[index] = piece;
+}
+
 bool Game::inside_board(int x, int y) const {
     return (x >= 0 && x < BOARD_SIZE && y >= 0 && y < BOARD_SIZE);
 }
@@ -173,6 +181,8 @@ std::vector<Position> Game::trapped_area(int x, int y) const {
         throw std::out_of_range("Position is out of board bounds");
     }
 
+    std::vector<Position> moves = calculate_moves(x, y);
+
     std::vector<Position> area;
     std::queue<Position> to_visit;
     std::set<Position> visited;
@@ -202,7 +212,7 @@ std::vector<Position> Game::trapped_area(int x, int y) const {
 
             PieceType next_piece = board[translate_position(next.x, next.y)];
 
-            if (next_piece == looking_for) {
+            if (next_piece == looking_for && !moves.empty()) {
                 return {}; // Found a piece of the opposite color - not trapped
             } else if (next_piece == PieceType::EMPTY && visited.find(next) == visited.end()) {
                 to_visit.push(next); // Found an empty space - continue searching

@@ -2,8 +2,10 @@
 #include <vector>
 
 #include "interface.hpp"
+#include "bot.hpp"
 
 static Game game;
+static Bot bot(1); // Initialize the bot with a depth of 3
 
 /* General */
 WASM_EXPORT void* wasm_malloc(size_t size) {
@@ -82,4 +84,15 @@ WASM_EXPORT bool* wasm_get_areas() {
     }
     
     return areas;
+}
+
+WASM_EXPORT BotDecision* wasm_make_decision() {
+    static BotDecision decision;
+    
+    decision = bot.make_decision(game, game.get_current_player());
+    std::cout << "Bot decision made: from (" << decision.from.x << ", " << decision.from.y
+              << ") to (" << decision.move.x << ", " << decision.move.y
+              << ") with arrow at (" << decision.arrow.x << ", " << decision.arrow.y << ")" << std::endl;
+
+    return &decision;
 }
